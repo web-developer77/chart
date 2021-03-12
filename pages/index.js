@@ -65,7 +65,11 @@ export default function Home() {
   const setPeriodicity = () => {
     if(!stx)
       return;
-    stx.setPeriodicity(timeOption.value, timeOption.timeUnits);
+    stx.setPeriodicity({
+      period: timeOption.period,
+      interval: 1,
+      timeUnit: 'second'
+    });
   };
 
   useEffect(() => {
