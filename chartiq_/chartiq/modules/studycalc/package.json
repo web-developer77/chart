@@ -1,0 +1,22 @@
+{
+	"name": "@chartiq/studycalc",
+	"description": "Study Calculator Module",
+	"version": "1.0.0",
+	"main": "study-calculator.js",
+	"type": "module",
+	"files": [
+		"study-calculator.js"
+	],
+	"scripts": {
+		"simple": "node --experimental-modules simpleExample.js",
+		"detailed": "node --experimental-modules detailedExample.js",
+		"simple:old": "node -r esm simpleExample.js",
+		"detailed:old": "node -r esm detailedExample.js"
+	},
+	"author": "ChartIQ",
+	"license": "SEE LICENSE IN LICENSE",
+	"dependencies": {
+		"chartiq": "./path/to/chartiq-X.X.X.tgz",
+		"esm": "^3.2.25"
+	}
+}
