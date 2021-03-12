@@ -24,7 +24,6 @@ export default function Home() {
   const [timeOption, setTimeOption] = useState(uiConfig.timeOptions('default')[0]);
 
   const loadChart = () => {
-    console.log('loading chart');
     stx.loadChart(
       pair.pair, 
       []
@@ -33,7 +32,10 @@ export default function Home() {
 
   const createStx = () => {
     const stx = new CIQ.ChartEngine({ container, layout: { chartType: chartType.type } });
-    stx.streamParameters.maxWait = 50;
+    stx.dataCallback = () => {
+      //stx.loadChart(pair.pair, stx.chart.masterData);
+    };
+    //stx.streamParameters.maxWait = 1000;
     stx.chart.xAxis.timeUnit = CIQ.MILLISECOND;
     //new CIQ.Animation(stx, {
     //  tension: 0.3
@@ -63,7 +65,6 @@ export default function Home() {
   const setPeriodicity = () => {
     if(!stx)
       return;
-    console.log(timeOption);
     stx.setPeriodicity(timeOption.value, timeOption.timeUnits);
   };
 
