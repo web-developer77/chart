@@ -1,8 +1,8 @@
-const pairs = ['EUR/SGD', 'USD/EUR'];
+const pairs = ['BTC-USD', 'ETH-BTC'];
 const chartTypes = ['Mountain', 'Line', 'Candle'];
 
 const oneSecond = { value: 1, period: 1, timeUnits: 'second', label: '1 s' };
-const minutes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+const minutes = [1, 5, 10]
   .map(m => (
     {
       value: m,

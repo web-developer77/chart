@@ -23,8 +23,7 @@ export default function Toolbar(props){
           name='label'
           handleOptionSelect={e => setPair(e)}
           menuId='pairSelect'
-          title='Pair'
-          hasCheckboxes={true}
+          title={pair.pair}
           selected={pair} 
         />
         <MenuSelect
@@ -43,8 +42,7 @@ export default function Toolbar(props){
           name='label'
           handleOptionSelect={e => setTimeOption(e)}
           menuId='timeOptionSelect'
-          title='Time Setting'
-          hasCheckboxes={true}
+          title={timeOption.label}
           selected={timeOption} 
         />
       </div>

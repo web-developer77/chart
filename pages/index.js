@@ -21,6 +21,7 @@ export default function Home() {
   const [pair, setPair] = useState(uiConfig.pairs[0]);
   const [stx, setStx] = useState(null);
   const [polygon, setPolygon] = useState(null);
+  const [timeOptions, setTimeOptions] = useState(uiConfig.timeOptions('default'));
   const [timeOption, setTimeOption] = useState(uiConfig.timeOptions('default')[0]);
 
   const loadChart = () => {
@@ -36,7 +37,7 @@ export default function Home() {
       //stx.loadChart(pair.pair, stx.chart.masterData);
     };
     //stx.streamParameters.maxWait = 1000;
-    stx.chart.xAxis.timeUnit = CIQ.MILLISECOND;
+    //stx.chart.xAxis.timeUnit = CIQ.MILLISECOND;
     //new CIQ.Animation(stx, {
     //  tension: 0.3
     //});
@@ -54,12 +55,8 @@ export default function Home() {
   };
 
   const pairSubscribe = () => {
-    polygon.subscribe('C.' + pair.pair, tick => {
-      stx.updateChartData({
-        DT: new Date(),
-        Last: tick.b
-      }, null, { fillGaps: true });
-    });
+    polygon.subscribe(pair.pair);
+    stx.attachQuoteFeed(polygon.quoteFeed, {refreshInterval: 1});
   };
 
   const setPeriodicity = () => {
@@ -86,6 +83,9 @@ export default function Home() {
   }, [stx, polygon]);
 
   useEffect(() => {
+    const newTimeOptions = uiConfig.timeOptions(chartType.type); 
+    setTimeOptions(timeOptions);
+    setTimeOption(timeOptions[0]);
     if(stx)
       stx.setChartType(chartType.type);
   }, [chartType]);
@@ -113,7 +113,7 @@ export default function Home() {
       <Toolbar 
         pairs={uiConfig.pairs}
         chartTypes={uiConfig.chartTypes}
-        timeOptions={uiConfig.timeOptions(chartType)}
+        timeOptions={timeOptions}
         pair={pair}
         chartType={chartType}
         timeOption={timeOption}
