@@ -38,9 +38,9 @@ export default function Home() {
     };
     //stx.streamParameters.maxWait = 1000;
     //stx.chart.xAxis.timeUnit = CIQ.MILLISECOND;
-    //new CIQ.Animation(stx, {
-    //  tension: 0.3
-    //});
+    new CIQ.Animation(stx, {
+      tension: 0.3
+    });
     setStx(stx);
   };
 

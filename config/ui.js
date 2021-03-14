@@ -11,12 +11,15 @@ const minutes = [1, 5, 10]
       label: m + ' m'
     }));
 
+const seconds = [1, 10, 30].map(s => ({ value: s, period: s, timeUnits: 'second', label: s + ' s' }));
+const oneMinute = { value: 1, period: 60, timeUnits: 'minute', label: '1 m' };
+
 const timeOptions = chartType => {
   if(!chartType)
     return [];
   if(chartType === 'candle')
-    return minutes;
-  return [oneSecond, ...minutes];
+    return oneMinute;
+  return [...seconds, oneMinute];
 };
 
 export default {
