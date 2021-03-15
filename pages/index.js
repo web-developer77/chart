@@ -35,7 +35,6 @@ export default function Home() {
     const stx = new CIQ.ChartEngine({ 
       container, 
       layout: { 
-        crosshair: true,
         chartType: chartType.type 
       },
       preferences: {
