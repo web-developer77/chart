@@ -1,3 +1,4 @@
+import { CIQ } from 'chartiq/js/chartiq';
 const pairs = ['BTC-USD', 'ETH-BTC'];
 const chartTypes = ['Mountain', 'Line', 'Candle'];
 
@@ -22,8 +23,17 @@ const timeOptions = chartType => {
   return [...seconds, oneMinute];
 };
 
+const studyList = () => {
+  const studies = CIQ.Studies.studyLibrary;
+  const result = Object.keys(studies)
+    .sort()
+    .map(studyName => studies[studyName]);
+  return result;
+};
+
 export default {
   pairs: pairs.map(p => ({pair: p, label: p})),
   chartTypes: chartTypes.map(t => ({type: t.toLowerCase(), label: t})),
-  timeOptions
+  timeOptions,
+  studyList: studyList()
 };

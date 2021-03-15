@@ -45,11 +45,9 @@ export default function Home() {
     stx.dataCallback = () => {
       //stx.loadChart(pair.pair, stx.chart.masterData);
     };
-    //stx.streamParameters.maxWait = 1000;
+    stx.streamParameters.maxWait = 500;
     //stx.chart.xAxis.timeUnit = CIQ.MILLISECOND;
-    //new CIQ.Animation(stx, {
-    //  tension: 0.3
-    //});
+    //new CIQ.Animation(stx, { tension: 0 });
     setStx(stx);
   };
 
@@ -120,9 +118,11 @@ export default function Home() {
     <div className='ciq-night'>
     <ciq-UI-wraper>
       <Toolbar 
+        stx={stx}
         pairs={uiConfig.pairs}
         chartTypes={uiConfig.chartTypes}
         timeOptions={timeOptions}
+        studyList={uiConfig.studyList}
         pair={pair}
         chartType={chartType}
         timeOption={timeOption}

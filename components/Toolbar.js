@@ -1,11 +1,14 @@
 import React from 'react';
 import MenuSelect from './MenuSelect';
+import { CIQ } from 'chartiq/js/chartiq';
 
 export default function Toolbar(props){
   const { 
+    stx,
     pairs, 
     chartTypes,
     timeOptions,
+    studyList,
     pair,
     timeOption,
     chartType,
@@ -44,6 +47,16 @@ export default function Toolbar(props){
           menuId='timeOptionSelect'
           title={timeOption.label}
           selected={timeOption} 
+        />
+        <MenuSelect hasButtons={false}
+          options={studyList}
+          keyName='study'
+          name='name'
+          handleOptionSelect={(stx, study) => CIQ.Studies.addStudy(stx, study)}
+          needsCiq={true}
+          ciq={stx}
+          menuId='studySelect'
+          title='Studies' 
         />
       </div>
       <div className='right'>
