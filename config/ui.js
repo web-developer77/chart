@@ -28,6 +28,7 @@ const studyList = () => {
   const result = Object.keys(studies)
     .sort()
     .map(studyName => studies[studyName]);
+  console.log(result);
   return result;
 };
 

@@ -52,7 +52,7 @@ export default function Toolbar(props){
           options={studyList}
           keyName='study'
           name='name'
-          handleOptionSelect={(stx, study) => CIQ.Studies.addStudy(stx, study)}
+          handleOptionSelect={(stx, study) => CIQ.Studies.addStudy(stx, study.name)}
           needsCiq={true}
           ciq={stx}
           menuId='studySelect'
