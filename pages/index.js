@@ -32,15 +32,24 @@ export default function Home() {
   };
 
   const createStx = () => {
-    const stx = new CIQ.ChartEngine({ container, layout: { chartType: chartType.type } });
+    const stx = new CIQ.ChartEngine({ 
+      container, 
+      layout: { 
+        crosshair: true,
+        chartType: chartType.type 
+      },
+      preferences: {
+        currentPriceLine: true
+      }
+    });
     stx.dataCallback = () => {
       //stx.loadChart(pair.pair, stx.chart.masterData);
     };
     //stx.streamParameters.maxWait = 1000;
     //stx.chart.xAxis.timeUnit = CIQ.MILLISECOND;
-    new CIQ.Animation(stx, {
-      tension: 0.3
-    });
+    //new CIQ.Animation(stx, {
+    //  tension: 0.3
+    //});
     setStx(stx);
   };
 
