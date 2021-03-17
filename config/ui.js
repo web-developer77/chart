@@ -19,7 +19,7 @@ const timeOptions = chartType => {
   if(!chartType)
     return [];
   if(chartType === 'candle')
-    return oneMinute;
+    return [oneMinute];
   return [...seconds, oneMinute];
 };
 
@@ -28,7 +28,6 @@ const studyList = () => {
   const result = Object.keys(studies)
     .sort()
     .map(studyName => studies[studyName]);
-  console.log(result);
   return result;
 };
 

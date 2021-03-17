@@ -170,7 +170,15 @@ nav {
 
 /* Standard Button Dimensions, Color */
 .ciq-nav button, button:active, button:focus {
+  height: 2em;
   background-color: transparent;
+  vertical-align: middle;
+  cursor: pointer;
+  border: solid 1px transparent;
+  outline: none; }
+
+.ciq-footer button, button:active, button:focus {
+  margin-top: 1em;
   vertical-align: middle;
   cursor: pointer;
   border: solid 1px transparent;

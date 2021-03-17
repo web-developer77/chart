@@ -4,6 +4,7 @@ import 'chartiq/css/page-defaults.css';
 import 'chartiq/css/stx-chart.css';
 import 'chartiq/css/chartiq.css';
 import '../styles/CIQ_Seed.css';
+import '../styles/buybutton.css';
 
 function SafeHydrate({ children  }) {
   return (
