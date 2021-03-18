@@ -1,0 +1,9 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+@menuBorderRadius: 2px;
+@menuBackground: #151f28;
+@itemColor: #969a9e;
+@selectedColor: #fff;
+@selectedBackground: #233545;
+@hoveredItemBackground: #1c2936;

@@ -178,7 +178,6 @@ nav {
   outline: none; }
 
 .ciq-footer button, button:active, button:focus {
-  margin-top: 1em;
   vertical-align: middle;
   cursor: pointer;
   border: solid 1px transparent;
@@ -932,4 +931,8 @@ div.shareMsg {
   font-family: "Roboto", sans-serif;
   color: #666; }
 
+  .ciq-nav .dropdown {
+    margin-top: 0.2em;
+    margin-right: 1em;
+  }
 /*# sourceMappingURL=CIQ_Seed.css.map */

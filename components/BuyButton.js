@@ -9,7 +9,7 @@ export default function BuyButton(){
   //}, []);
 
   const onClick = e => {
-    window.alert(`${state.pair.pair}: ${state.lastQuote.Value}`);
+    window.alert(`${state.pair}: ${state.lastQuote.Value}`);
   };
   //return(
   //  <div className='buy-button'>

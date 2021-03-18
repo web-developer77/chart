@@ -15,7 +15,7 @@ const minutes = [1, 5, 10]
 const seconds = [1, 10, 30].map(s => ({ value: s, period: s, timeUnits: 'second', label: s + ' s' }));
 const oneMinute = { value: 1, period: 60, timeUnits: 'minute', label: '1 m' };
 
-const timeOptions = chartType => {
+const buildTimeOptions = chartType => {
   if(!chartType)
     return [];
   if(chartType === 'candle')
@@ -23,17 +23,21 @@ const timeOptions = chartType => {
   return [...seconds, oneMinute];
 };
 
+const timeOptions = chartType => {
+  return buildTimeOptions(chartType).map(option => ({text: option.label, value: option, key: option.label}));
+};
+
 const studyList = () => {
   const studies = CIQ.Studies.studyLibrary;
   const result = Object.keys(studies)
     .sort()
-    .map(studyName => studies[studyName]);
+    .map(studyName => ({text: studyName, value: studies[studyName], key: studyName}));
   return result;
 };
 
 export default {
-  pairs: pairs.map(p => ({pair: p, label: p})),
-  chartTypes: chartTypes.map(t => ({type: t.toLowerCase(), label: t})),
+  pairs: pairs.map(pair => ({text: pair, value: pair, key: pair})),
+  chartTypes: chartTypes.map(t => ({text: t, value: t.toLowerCase(), key: t})),
   timeOptions,
   studyList: studyList()
 };

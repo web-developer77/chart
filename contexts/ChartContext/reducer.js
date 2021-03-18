@@ -7,30 +7,31 @@ export const initialState = {
   stx: null,
   polygon: Polygon('4uVVJPuqfx3sSr0YA8MFGAO9aTreizZV'),
   pairs: uiSettings.pairs,
-  pair: uiSettings.pairs[0],
+  pair: uiSettings.pairs[0].value,
   chartTypes: uiSettings.chartTypes,
-  chartType: uiSettings.chartTypes[0],
+  chartType: uiSettings.chartTypes[0].value,
   timeOptions,
-  timeOption: timeOptions[0],
+  timeOption: timeOptions[0].value,
   studyList: uiSettings.studyList,
   lastQuote: { DT: new Date(), Value: 0 },
   showStudyModal: true,
   studyHelper: true
 };
 
+console.log(initialState);
+
 export const reducer = (state, action) => {
   switch (action.type) {
 
     case 'POLYGON_INIT':
       state.polygon.init()
-      .then(() => state.polygon.subscribe(state.pairs[0].pair));
+      .then(() => state.polygon.subscribe(state.pairs[0].value));
       return state;
 
     case 'SET_STX':
       return { ...state, stx: action.payload };
 
     case 'SET_TIME_OPTION':
-      console.log(action.payload);
       state.stx.setPeriodicity({
         period: action.payload.period,
         interval: 1,
@@ -42,7 +43,7 @@ export const reducer = (state, action) => {
       return { ...state, timeOptions: action.payload };
 
     case 'LOAD_CHART':
-      state.stx.loadChart(state.pair.pair, []);
+      state.stx.loadChart(state.pair, []);
       return state;
 
     case 'SET_LAST_QUOTE':
@@ -59,15 +60,16 @@ export const reducer = (state, action) => {
       return state;
 
     case 'SET_PAIR':
+      console.log(action.payload);
       state.polygon.unsubscribe()
         .then(() => {
-          state.polygon.subscribe(action.payload.pair);
+          state.polygon.subscribe(action.payload.value);
           reducer(state, {type: 'LOAD_CHART'});
         });
-      return { ...state, pair: action.payload };
+      return { ...state, pair: action.payload.value };
 
     case 'SET_CHART_TYPE':
-      state.stx.setChartType(action.payload.type);
+      state.stx.setChartType(action.payload);
       return { ...state, chartType: action.payload };
 
     case 'ADD_STUDY':

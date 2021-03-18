@@ -16,7 +16,7 @@ export default function Home() {
     const stx = new CIQ.ChartEngine({ 
       container, 
       layout: { 
-        chartType: state.chartType.type 
+        chartType: state.chartType
       },
       preferences: {
         currentPriceLine: true
@@ -29,7 +29,7 @@ export default function Home() {
     //stx.chart.xAxis.timeUnit = CIQ.MILLISECOND;
     //new CIQ.Animation(stx, { tension: 0 });
     //stx.attachQuoteFeed(state.polygon.quoteFeed, {refreshInterval: 1});
-    stx.setPeriodicity(state.timeOptions[0]);
+    stx.setPeriodicity(state.timeOption);
     return stx;
   };
   
@@ -43,21 +43,19 @@ export default function Home() {
     });
     dispatch({
       type: 'SET_TIME_OPTION',
-      payload: state.timeOptions[0]
+      payload: state.timeOptions[0].value
     });
     dispatch({type: 'POLYGON_INIT'});
     dispatch({type: 'ATTACH_QUOTE_FEED', payload: dispatch});
   }, []);
 
-  console.log(state);
-    
 
   return (
     <div 
       className='ciq-chart-area'
     >
       <div className='chartContainer' ref={node => container = node}></div>
-      <div className='chart-title' style={{top: '0px'}}>{state.pair.pair}</div>
+      <div className='chart-title' style={{top: '0px'}}>{state.pair}</div>
     </div>
   );
 }

@@ -5,6 +5,8 @@ import { CIQ } from 'chartiq/js/chartiq';
 import { ChartContext } from '../contexts/ChartContext'; 
 import uiConfig from '../config/ui';
 
+import { Button, Dropdown } from 'semantic-ui-react';
+
 export default function Toolbar(props){
 
   const [state, dispatch] = useContext(ChartContext);
@@ -12,46 +14,31 @@ export default function Toolbar(props){
   return (
     <nav className='ciq-nav'>
       <div className='left'>
-        <MenuSelect
-          options={state.pairs}
-          keyName='pair'
-          name='label'
-          handleOptionSelect={e => dispatch({type: 'SET_PAIR', payload: e})}
-          menuId='pairSelect'
-          title={state.pair.pair}
-          selected={state.pair} 
+        <Dropdown
+          options={uiConfig.pairs}
+          value={state.pair}
+          onChange={(e, data) => dispatch({type: 'SET_PAIR', payload: data.value})}
         />
-        <MenuSelect
+        <Dropdown
+          text='Chart Type'
           options={state.chartTypes}
-          keyName='type'
-          name='label'
-          handleOptionSelect={e => {
-            const timeOptions = uiConfig.timeOptions(e.type);
+          value={state.chartType}
+          onChange={(e, data) => {
+            const timeOptions = uiConfig.timeOptions(data.value);
             dispatch({type: 'SET_TIME_OPTIONS', payload: timeOptions});
-            dispatch({type: 'SET_TIME_OPTION', payload: timeOptions[0]});
-            dispatch({type: 'SET_CHART_TYPE', payload: e });
+            dispatch({type: 'SET_TIME_OPTION', payload: timeOptions[0].value});
+            dispatch({type: 'SET_CHART_TYPE', payload: data.value });
           }}
-          menuId='chartTypeSelect'
-          title='Chart Type'
-          hasCheckboxes={true}
-          selected={state.chartType} 
         />
-        <MenuSelect
+        <Dropdown
           options={state.timeOptions}
-          keyName='value'
-          name='label'
-          handleOptionSelect={e => dispatch({type: 'SET_TIME_OPTION', payload: e})}
-          menuId='timeOptionSelect'
-          title={state.timeOption.label}
-          selected={state.timeOption} 
+          value={state.timeOption}
+          onChange={(e, data) => dispatch({type: 'SET_TIME_OPTION', payload: data.value})}
         />
-        <MenuSelect hasButtons={false}
+        <Dropdown
+          text='Studies'
           options={state.studyList}
-          keyName='study'
-          name='name'
-          handleOptionSelect={e => dispatch({type: 'ADD_STUDY', payload: e})}
-          menuId='studySelect'
-          title='Studies' 
+          onChange={(e, data) => console.log(data)}
         />
       </div>
       <div className='right'>
