@@ -12,7 +12,6 @@
     "chartiq": "file:chartiq_/chartiq-8.2.0.tgz",
     "next": "10.0.8",
     "react": "17.0.1",
-    "react-datepicker": "^3.6.0",
     "react-dom": "17.0.1",
     "semantic-ui-react": "^2.0.3"
   },

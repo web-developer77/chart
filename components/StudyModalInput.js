@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Checkbox, Dropdown, Input } from 'semantic-ui-react';
-import DateTimePicker from 'react-datetime-picker';
 import { getValueField } from './fieldMappings';
 import { ChartContext } from '../contexts/ChartContext'; 
 
@@ -22,12 +21,12 @@ const elMappings = {
   },
 
   date: {
-    element: DateTimePicker,
-    props: { disableClock: true }
+    element: null,
+    props: { disableTime: true }
   },
 
   time: {
-    element: DateTimePicker,
+    element: null,
     props: { disableCalendar: true }
   }
 
