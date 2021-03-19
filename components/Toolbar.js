@@ -38,7 +38,8 @@ export default function Toolbar(props){
         <Dropdown
           text='Studies'
           options={state.studyList}
-          onChange={(e, data) => console.log(data)}
+          onChange={(e, data) => dispatch({type: 'OPEN_STUDY_MODAL', payload: data.value})}
+          scrolling
         />
       </div>
       <div className='right'>

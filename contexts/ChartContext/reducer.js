@@ -13,19 +13,19 @@ export const initialState = {
   timeOptions,
   timeOption: timeOptions[0].value,
   studyList: uiSettings.studyList,
+  study: null,
+  studyHelper:  null,
   lastQuote: { DT: new Date(), Value: 0 },
   showStudyModal: true,
-  studyHelper: true
+  studyForm: {}
 };
-
-console.log(initialState);
 
 export const reducer = (state, action) => {
   switch (action.type) {
 
     case 'POLYGON_INIT':
       state.polygon.init()
-      .then(() => state.polygon.subscribe(state.pairs[0].value));
+      .then(() => state.polygon.subscribe(state.pair));
       return state;
 
     case 'SET_STX':
@@ -33,7 +33,7 @@ export const reducer = (state, action) => {
 
     case 'SET_TIME_OPTION':
       state.stx.setPeriodicity({
-        period: action.payload.period,
+        period: action.payload,
         interval: 1,
         timeUnit: 'second'
       });
@@ -63,10 +63,10 @@ export const reducer = (state, action) => {
       console.log(action.payload);
       state.polygon.unsubscribe()
         .then(() => {
-          state.polygon.subscribe(action.payload.value);
+          state.polygon.subscribe(action.payload);
           reducer(state, {type: 'LOAD_CHART'});
         });
-      return { ...state, pair: action.payload.value };
+      return { ...state, pair: action.payload };
 
     case 'SET_CHART_TYPE':
       state.stx.setChartType(action.payload);
@@ -77,10 +77,23 @@ export const reducer = (state, action) => {
       return state;
 
     case 'SHOW_STUDY_MODAL':
-      return { ...state, studyHelper: action.payload };
+      return { ...state, showStudyModal: action.payload};
 
     case 'CLOSE_STUDY_MODAL':
-      return { ...state, showStudyModal: false, studyHelper: false };
+      return { ...state, showStudyModal: false };
+
+    case 'OPEN_STUDY_MODAL':
+      const studyHelper = new CIQ.Studies.DialogHelper({ name: action.payload, stx: state.stx });
+      return { 
+        ...state, 
+        study: null, 
+        showStudyModal: true, 
+        studyHelper,
+        studyForm: {}
+      };
+    
+    case 'SET_STUDY_FORM':
+      return { ...state, studyForm: { ...state.studyForm, ...action.payload } };
 
     default:
       console.log(action);

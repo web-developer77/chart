@@ -29,7 +29,7 @@ export default function Home() {
     //stx.chart.xAxis.timeUnit = CIQ.MILLISECOND;
     //new CIQ.Animation(stx, { tension: 0 });
     //stx.attachQuoteFeed(state.polygon.quoteFeed, {refreshInterval: 1});
-    stx.setPeriodicity(state.timeOption);
+    stx.setPeriodicity(state.timeOptions[0].value);
     return stx;
   };
   

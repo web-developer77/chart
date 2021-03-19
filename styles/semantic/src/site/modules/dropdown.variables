@@ -7,3 +7,4 @@
 @selectedColor: #fff;
 @selectedBackground: #233545;
 @hoveredItemBackground: #1c2936;
+@hoveredItemColor: #009cff;
