@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Checkbox, Dropdown, Input } from 'semantic-ui-react';
 import { getValueField } from './fieldMappings';
 import { ChartContext } from '../contexts/ChartContext'; 
+import { TimePicker, DatePicker } from 'antd';
 
 const elMappings = {
 
@@ -21,12 +22,12 @@ const elMappings = {
   },
 
   date: {
-    element: null,
+    element: DatePicker,
     props: { disableTime: true }
   },
 
   time: {
-    element: null,
+    element: TimePicker,
     props: { disableCalendar: true }
   }
 
