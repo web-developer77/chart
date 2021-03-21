@@ -1,3 +1,10 @@
 /*******************************
          Site Overrides
 *******************************/
+@headerBackground: #151f28;
+@headerColor: #969a9e;
+@headerPadding: 0.5em 1em;
+@contentBackground: #1c2936;
+@contentColor: #fff;
+@actionBackground: #151f28;
+@actionPadding: 0.5em 1em;

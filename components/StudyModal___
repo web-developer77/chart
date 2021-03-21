@@ -8,10 +8,12 @@ import { getValueField } from './fieldMappings';
 export default function StudyModal(){
   
   const [state, dispatch] = useContext(ChartContext);
-
+  if(!state.studyHelper)
+    return null;
+  
   const inputs = state.studyHelper.inputs;
   const outputs = state.studyHelper.outputs;
-
+  
   const inputsInit = () => {
     const initialForm = {};
     for(let input of inputs){
@@ -30,27 +32,13 @@ export default function StudyModal(){
     const initialOutputs = {};
     for(let output of outputs)
       initialOutputs[output.name] = output.color;
-    console.log(initialOutputs);
     dispatch({type: 'SET_STUDY_OUTPUTS', payload: initialOutputs});
   };
 
   useEffect(() => {
-    if(!state.studyHelper || state.studyInitPassed === true || state.showStudyModal === false)
-      return;
-    inputsInit();
     outputsInit();
-    dispatch({type: 'STUDY_INIT_PASSED', payload: true});
-  });
-
-  const closeDialog = () => {
-    dispatch({type: 'STUDY_INIT_PASSED', payload: false});
-    dispatch({type: 'SHOW_STUDY_MODAL', payload: false})
-  };
-
-  const studyUpdate = () => {
-    dispatch({type: 'STUDY_UPDATE'});
-    closeDialog();
-  };
+    inputsInit();
+  }, []);
 
   return(
     <Modal
@@ -62,31 +50,31 @@ export default function StudyModal(){
         <Divider horizontal>Inputs</Divider>
         {
           inputs.map((input, index) => (
-            <div className='study-modal-row' key={input.name}>
+            <div className='study-modal-row'>
               <span>{input.name + ':'}</span>
-              <StudyModalInput inputParams={input} />
+              <StudyModalInput inputParams={input} key={input.name}/>
             </div>
           ))
         }
-    
         <Divider horizontal>Outputs</Divider>
-        {
-          outputs.map((output, index) => (
-              <StudyModalOutput 
-                key={output.name}
-                name={output.name}
-                color={state.studyOutputs[output.name]} 
-                onChange={color => dispatch({type: 'SET_STUDY_OUTPUTS', payload: { [output.name]: color }})} 
-              />
-          ))
-        }
+          {
+            Object.keys(outputs).map((output, index) => {(
+              <div className='study-modal-row'>
+                <span>{output + ':'}</span>
+                <StudyModalOutput 
+                  color={state.studyOutputs[output]}
+                  onChange={color => dispatch({type: 'SET_STUDY_OUTPUTS', payload: {[output]: color}})}
+                />
+              </div>
+            )})
+          }
       </Modal.Content>
       <Modal.Actions>
-        <Button className='cancel-btn' size='mini'  onClick={closeDialog}>
-          Cancel
+        <Button color='cancelColor' size='mini'  onClick={e => dispatch({type: 'SHOW_STUDY_MODAL', payload: false})}>
+          No
         </Button>
-        <Button size='mini' onClick={studyUpdate}>
-          Apply
+        <Button positive size='mini'>
+          Yes
         </Button>
       </Modal.Actions>
     </Modal>

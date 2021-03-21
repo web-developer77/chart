@@ -5308,7 +5308,7 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: rgba(0, 0, 0, 0.85);
+  color: #969a9e;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -33987,7 +33987,7 @@ select.ui.dropdown {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  border-radius: 0.28571429rem;
+  border-radius: 5px;
   -webkit-user-select: text;
   -moz-user-select: text;
   -ms-user-select: text;
@@ -34039,12 +34039,12 @@ select.ui.dropdown {
 .ui.modal > .header {
   display: block;
   font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  background: #FFFFFF;
+  background: #151f28;
   margin: 0em;
-  padding: 1.25rem 1.5rem;
+  padding: 0.5em 1em;
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: rgba(0, 0, 0, 0.85);
+  color: #969a9e;
   border-bottom: 1px solid rgba(34, 36, 38, 0.15);
 }
 
@@ -34064,7 +34064,8 @@ select.ui.dropdown {
   font-size: 1em;
   line-height: 1.4;
   padding: 1.5rem;
-  background: #FFFFFF;
+  background: #1c2936;
+  color: #fff;
 }
 
 .ui.modal > .image.content {
@@ -34141,8 +34142,8 @@ select.ui.dropdown {
 ---------------*/
 
 .ui.modal > .actions {
-  background: #F9FAFB;
-  padding: 1rem 1rem;
+  background: #151f28;
+  padding: 0.5em 1em;
   border-top: 1px solid rgba(34, 36, 38, 0.15);
   text-align: right;
 }

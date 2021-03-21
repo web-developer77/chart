@@ -1,0 +1,21 @@
+.study-modal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.color-rect {
+  width: 1em;
+  height: 1em;
+}
+
+.picker-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1em;
+}
+
+.cancel-btn {
+  background: #2b3f52 !important;
+}

@@ -23,12 +23,12 @@ const elMappings = {
 
   date: {
     element: DatePicker,
-    props: { disableTime: true }
+    props: { size: 'small'}
   },
 
   time: {
     element: TimePicker,
-    props: { disableCalendar: true }
+    props: { size: 'small' }
   }
 
 };
@@ -49,11 +49,9 @@ const paramsNormalize = (params) => {
 
 export default function StudyModalInput({inputParams}){
   const [state, dispatch] = useContext(ChartContext);
-  console.log(inputParams.type);
 
   const mapping = elMappings[inputParams.type];
   const normalizedParams = paramsNormalize(inputParams);
-  console.log(normalizedParams);
   const valueField = getValueField(inputParams);
 
   const onChange = (e, data) => {

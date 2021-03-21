@@ -36,11 +36,22 @@ export default function Toolbar(props){
           onChange={(e, data) => dispatch({type: 'SET_TIME_OPTION', payload: data.value})}
         />
         <Dropdown
+          pointing
           text='Studies'
-          options={state.studyList}
-          onChange={(e, data) => dispatch({type: 'OPEN_STUDY_MODAL', payload: data.value})}
+          onChange={(e, data) => console.log(data)}
           scrolling
-        />
+        >
+          <Dropdown.Menu>
+          {
+            uiConfig.studyList.map((study, index) => (
+              <Dropdown.Item 
+                key={study.value}
+                onClick={(e, data) => dispatch({type: 'OPEN_STUDY_MODAL', payload: data.children})}
+              >{study.value}
+              </Dropdown.Item>)
+          )}
+          </Dropdown.Menu>
+        </Dropdown>
       </div>
       <div className='right'>
       </div>

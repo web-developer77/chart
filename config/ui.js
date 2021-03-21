@@ -33,16 +33,16 @@ const timeOptions = chartType => {
 
 const studyList = () => {
   const studies = CIQ.Studies.studyLibrary;
-  const result = Object.keys(studies)
+  return Object.keys(studies)
     .sort()
     .filter(studyName => typeof studies[studyName] === 'object')
     .map(studyName => ({text: studyName, value: studyName}));
-  return result;
 };
 
 export default {
   pairs: pairs.map(pair => ({text: pair, value: pair, key: pair})),
   chartTypes: chartTypes.map(t => ({text: t, value: t.toLowerCase(), key: t})),
   timeOptions,
-  studyList: ['ATR Bands', 'AVWAP'].map(study => ({text: study, value: study}))
+  //studyList: ['ATR Bands', 'AVWAP', 'Stochastics'].map(study => ({text: study, value: study}))
+  studyList: studyList()
 };

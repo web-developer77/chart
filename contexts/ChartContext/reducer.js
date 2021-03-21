@@ -3,6 +3,7 @@ import Polygon from '../../util/polygon';
 import uiSettings from '../../config/ui'; 
 
 const timeOptions = uiSettings.timeOptions('default');
+const defaultStudyHelper = { inputs: [], outputs: [] };
 export const initialState = {
   stx: null,
   polygon: Polygon('4uVVJPuqfx3sSr0YA8MFGAO9aTreizZV'),
@@ -14,10 +15,12 @@ export const initialState = {
   timeOption: timeOptions[0].value,
   studyList: uiSettings.studyList,
   study: null,
-  studyHelper:  null,
+  studyHelper: defaultStudyHelper,
   lastQuote: { DT: new Date(), Value: 0 },
-  showStudyModal: true,
-  studyForm: {}
+  showStudyModal: false,
+  studyForm: {},
+  studyOutputs: {},
+  studyInitPassed: false
 };
 
 export const reducer = (state, action) => {
@@ -80,13 +83,13 @@ export const reducer = (state, action) => {
       return { ...state, showStudyModal: action.payload};
 
     case 'CLOSE_STUDY_MODAL':
-      return { ...state, showStudyModal: false };
+      return { ...state, showStudyModal: false, studyHelper: defaultStudyHelper, studyInitPassed: false };
 
     case 'OPEN_STUDY_MODAL':
-      const studyHelper = new CIQ.Studies.DialogHelper({ name: action.payload, stx: state.stx });
+      const sd = CIQ.Studies.addStudy(state.stx, action.payload);
+      const studyHelper = new CIQ.Studies.DialogHelper({ sd, stx: state.stx });
       return { 
         ...state, 
-        study: null, 
         showStudyModal: true, 
         studyHelper,
         studyForm: {}
@@ -94,6 +97,16 @@ export const reducer = (state, action) => {
     
     case 'SET_STUDY_FORM':
       return { ...state, studyForm: { ...state.studyForm, ...action.payload } };
+
+    case 'SET_STUDY_OUTPUTS':
+      return { ...state, studyOutputs: { ...state.studyOutputs, ...action.payload } };
+
+    case 'STUDY_INIT_PASSED':
+      return { ...state, studyInitPassed: action.payload };
+
+    case 'STUDY_UPDATE':
+      state.studyHelper.updateStudy({ inputs: state.studyForm, outputs: state.studyOutputs });
+      return state;
 
     default:
       console.log(action);
