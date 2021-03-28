@@ -44,7 +44,7 @@ export default function StudyModal(){
 
   const closeDialog = () => {
     dispatch({type: 'STUDY_INIT_PASSED', payload: false});
-    dispatch({type: 'SHOW_STUDY_MODAL', payload: false})
+    dispatch({type: 'SHOW_STUDY_MODAL', payload: false});
   };
 
   const studyUpdate = () => {

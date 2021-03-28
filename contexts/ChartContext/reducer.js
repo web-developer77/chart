@@ -1,12 +1,14 @@
 import { CIQ } from 'chartiq/js/chartiq';
-import Polygon from '../../util/polygon';
+//import Polygon from '../../util/polygon';
+import Triangle from '../../util/triangle';
 import uiSettings from '../../config/ui'; 
+import localStorage from '../../util/localStorage';
 
 const timeOptions = uiSettings.timeOptions('default');
 const defaultStudyHelper = { inputs: [], outputs: [] };
 export const initialState = {
   stx: null,
-  polygon: Polygon('4uVVJPuqfx3sSr0YA8MFGAO9aTreizZV'),
+  polygon: Triangle(),
   pairs: uiSettings.pairs,
   pair: uiSettings.pairs[0].value,
   chartTypes: uiSettings.chartTypes,
@@ -20,14 +22,15 @@ export const initialState = {
   showStudyModal: false,
   studyForm: {},
   studyOutputs: {},
-  studyInitPassed: false
+  studyInitPassed: false,
+  userId: localStorage.userId
 };
 
 export const reducer = (state, action) => {
   switch (action.type) {
 
     case 'POLYGON_INIT':
-      state.polygon.init()
+      state.polygon.init(state.userId)
       .then(() => state.polygon.subscribe(state.pair));
       return state;
 
