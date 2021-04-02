@@ -41,16 +41,29 @@ function Polygon(apiKey) {
       });
   };
 
-  const subscribe = (pair, handler) => {
+  const onMessage = e => {
+    const data = messageData(e, true);
+    switch(data.type){
+      case 'quote':
+        last = {DT: new Date(data.message.t), Value: data.message.Last};
+        break;
+      case 'trade':
+        console.log('got trade ');
+        console.log(data.message);
+        break;
+      case 'trade_update':
+        console.log('trade update');
+        console.log(data.message);
+        break;
+      default:
+        console.log('unknown command: ' + data);
+    }
+  }
+
+  const subscribe = (pair) => {
     send({action: 'subscribe', params: {pair}});
     pairSubscribed = pair; 
-    s.onmessage = e => {
-      const data = messageData(e, true);
-      if(handler)
-        handler(data);
-      last = {DT: new Date(data.t), Value: data.Last};
-
-    };
+    s.onmessage = onMessage; 
   };
 
   const unsubscribe = () => {
@@ -69,12 +82,18 @@ function Polygon(apiKey) {
     }
   };
 
+  const addTrade = trade => {
+    console.log(trade);
+    send({ action: 'add_trade', params: { trade } });
+  };
+
   return {
     init,
     subscribe,
     unsubscribe,
     pairSubscribed,
-    quoteFeed
+    quoteFeed,
+    addTrade
   };
 };
 

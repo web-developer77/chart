@@ -23,7 +23,11 @@ export const initialState = {
   studyForm: {},
   studyOutputs: {},
   studyInitPassed: false,
-  userId: localStorage.userId
+  userId: localStorage.userId,
+  bidAmountOptions: uiSettings.bidAmountOptions,
+  bidAmountOption: uiSettings.bidAmountOptions[0].value,
+  bidTimeOptions: uiSettings.bidTimeOptions,
+  bidTimeOption: uiSettings.bidTimeOptions[0].value
 };
 
 export const reducer = (state, action) => {
@@ -109,6 +113,21 @@ export const reducer = (state, action) => {
 
     case 'STUDY_UPDATE':
       state.studyHelper.updateStudy({ inputs: state.studyForm, outputs: state.studyOutputs });
+      return state;
+
+    case 'SET_BID_AMOUNT':
+      return { ...state, bidAmountOption: action.payload };
+
+    case 'SET_BID_TIME':
+      return { ...state, bidTimeOption: action.payload };
+
+    case 'ADD_TRADE':
+      const trade = { 
+        user: state.userId,
+        amount: state.bidAmountOption,  
+        time: state.bidTimeOption
+      };
+      state.polygon.addTrade(trade);
       return state;
 
     default:

@@ -39,10 +39,15 @@ const studyList = () => {
     .map(studyName => ({text: studyName, value: studyName}));
 };
 
+const bidAmountOptions = [10, 20, 30].map(bid => ({ text: '$' + bid, value: bid, key: 'bidAmount' + bid }));
+const bidTimeOptions = [1, 2, 3, 4, 5].map(time => ({ text: time + ' min.', value: time, key: 'bidTime' + time }));
+
 export default {
   pairs: pairs.map(pair => ({text: pair, value: pair, key: pair})),
   chartTypes: chartTypes.map(t => ({text: t, value: t.toLowerCase(), key: t})),
   timeOptions,
   //studyList: ['ATR Bands', 'AVWAP', 'Stochastics'].map(study => ({text: study, value: study}))
-  studyList: studyList()
+  studyList: studyList(),
+  bidAmountOptions,
+  bidTimeOptions
 };
