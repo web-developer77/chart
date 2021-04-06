@@ -27,7 +27,8 @@ export const initialState = {
   bidAmountOptions: uiSettings.bidAmountOptions,
   bidAmountOption: uiSettings.bidAmountOptions[0].value,
   bidTimeOptions: uiSettings.bidTimeOptions,
-  bidTimeOption: uiSettings.bidTimeOptions[0].value
+  bidTimeOption: uiSettings.bidTimeOptions[0].value,
+  trades: {}
 };
 
 export const reducer = (state, action) => {
@@ -70,7 +71,6 @@ export const reducer = (state, action) => {
       return state;
 
     case 'SET_PAIR':
-      console.log(action.payload);
       state.polygon.unsubscribe()
         .then(() => {
           state.polygon.subscribe(action.payload);
@@ -122,12 +122,18 @@ export const reducer = (state, action) => {
       return { ...state, bidTimeOption: action.payload };
 
     case 'ADD_TRADE':
+      const trades = { ...state.trades, [action.payload.id]: action.payload };
+      return { ...state, trades };
+
+    case 'SUBMIT_TRADE':
       const trade = { 
         user: state.userId,
         amount: state.bidAmountOption,  
-        time: state.bidTimeOption
+        time: state.bidTimeOption,
+        pair: state.pair,
+        type: action.payload.tradeType
       };
-      state.polygon.addTrade(trade);
+      state.polygon.addTrade(trade, action.payload.dispatch);
       return state;
 
     default:

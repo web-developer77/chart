@@ -26,19 +26,23 @@ export default function Trading(){
         <Button
           positive
           size='mini'
-          onClick={e => dispatch({type: 'ADD_TRADE', payload: 'call'})}
+          onClick={e => dispatch({type: 'SUBMIT_TRADE', payload: { tradeType: 'call', dispatch }})}
         >
           Call
         </Button>
         <Button
           negative
           size='mini'
-          onClick={e => dispatch({type: 'ADD_TRADE', payload: 'put'})}
+          onClick={e => dispatch({type: 'SUBMIT_TRADE', payload: { tradeType: 'put', dispatch } })}
         >
           Put
         </Button>
       </div>
-      <Trade trade={{ time:1, status: 'pending' }}/>
+      {
+        Object.values(state.trades).map((trade, index) => (
+          <Trade trade={trade} key={'trade' + trade.id}/>
+        ))
+      }
     </div>
   )
 };

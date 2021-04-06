@@ -3,12 +3,12 @@
 }
 
 .chart-area {
-  width: 90%;
+  width: 85%;
   height: 100vh;
 }
 
 .trade-area {
-  width: 10%;
+  width: 15%;
   color: #969a9e;
   padding: 3em 2em 2em 2em;
 }
@@ -30,12 +30,16 @@
   margin-right: 5px;
 }
 
+.trade-span {
+  margin-right: 0.5em;
+}
+
 .ciq-chart-area {
-  width: 90%;
+  width: 85%;
 }
 
 .ciq-footer {
-  width: 90%;
+  width: 85%;
 }
 
 .trade-icon {

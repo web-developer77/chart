@@ -14,6 +14,7 @@ const createSocket = () => {
 };
 
 function Polygon(apiKey) {
+  var dispatch = null;
   var s = null;
   var last = [];
   var pairSubscribed = '';
@@ -48,13 +49,15 @@ function Polygon(apiKey) {
         last = {DT: new Date(data.message.t), Value: data.message.Last};
         break;
       case 'trade':
-        console.log('got trade ');
-        console.log(data.message);
+        if(!dispatch)
+          return;
+        dispatch({ type: 'ADD_TRADE', payload: data.message });
         break;
-      case 'trade_update':
-        console.log('trade update');
-        console.log(data.message);
-        break;
+      //case 'trade_update':
+      //  if(!dispatch)
+      //    return;
+      //  dispatch({ type: 'ADD_TRADE', payload: data.message });
+      //  break;
       default:
         console.log('unknown command: ' + data);
     }
@@ -82,8 +85,8 @@ function Polygon(apiKey) {
     }
   };
 
-  const addTrade = trade => {
-    console.log(trade);
+  const addTrade = (trade, _dispatch) => {
+    dispatch = _dispatch;
     send({ action: 'add_trade', params: { trade } });
   };
 

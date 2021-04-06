@@ -1,12 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-export default function Timer({ seconds }){
-  const [ timer, setTimer ] = useState(seconds);
-
-  useEffect(() => {
-  }, []);
-
-  useEffect(() => console.log(timer));
+export default function Timer({ trade }){
+  const [ timer, setTimer ] = useState(trade.time * 60);
 
   setTimeout(() => {
     if(timer > 0)
@@ -20,7 +15,7 @@ export default function Timer({ seconds }){
   };
 
   return (
-    <span>{ timeStr() }</span>
+    <span className='trade-span'>{ timeStr() }</span>
   );
 
 };
