@@ -15,7 +15,7 @@ export default function Trade({trade}){
   };
 
   return(
-    <div className='trade-row'>
+    <div className='row'>
       <img src={typeImages[trade.type]} className='trade-icon'/>
       <span className='trade-span'>{'$' + trade.amount}</span>
       <span className='trade-span'>{trade.price}</span>
