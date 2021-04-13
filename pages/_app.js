@@ -8,6 +8,7 @@ import '../styles/buybutton.css';
 import '../styles/studymodal.css';
 import '../styles/trading.css';
 import '../styles/semantic/dist/semantic.min.css';
+import '../styles/binary-option.css';
 import 'antd/dist/antd.css';
 
 function SafeHydrate({ children  }) {

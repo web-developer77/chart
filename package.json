@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "antd": "^4.14.0",
-    "chartiq": "file:chartiq_/chartiq-8.2.0.tgz",
+    "chartiq": "file:mychartiq/chartiq-8.2.0.tgz",
     "next": "10.0.8",
     "react": "17.0.1",
     "react-color": "^2.19.3",
